@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
+  /* Palette: black, dark grays, white */
+  --color-void: #000000;
+  --color-surface: #141414;
+  --color-raised: #1f1f1f;
+  --color-line: #2c2c2c;
+  --color-muted: #8c8c8c;
+  --color-soft: #c4c4c4;
+  --color-paper: #ffffff;
+
+  --radius-tile: 1.25rem;
+}
+
+@utility page-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-void);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-paper);
+    color: var(--color-void);
+  }
+  button:not(:disabled),
+  [role="button"],
+  select {
+    cursor: pointer;
+  }
+}
+
+/* The one orchestrated moment: the hero headline lifts into place on load. */
+@keyframes rise {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.hero-line > span {
+  display: block;
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-line:nth-child(2) > span {
+  animation-delay: 0.12s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-line > span { animation: none; }
+  * { scroll-behavior: auto !important; }
+}
